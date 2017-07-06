@@ -1,3 +1,9 @@
+//replace with configured servers uri
+var serverBasePath = 'https://api.spotify.com/v1'; //"http://localhost:10000";
+var spotifyApi;
+
+
+
 function makeRequest() {
 
         /**
@@ -25,7 +31,9 @@ function makeRequest() {
         } else {
           if (access_token) {
 
+            spotifyApi = new spotifyApi(serverBasePath, access_token);
 
+/*
             // Make a call to Spotify for my credentials
             $.ajax({
                 url: 'https://api.spotify.com/v1/me',
@@ -36,21 +44,23 @@ function makeRequest() {
                   console.log('get my credentials: ', response);
                 }
             });
+*/
+
+          // Grab an artist -  hardcoded id of 'Elvis Presley'
+          var artistId = '43ZHCT0cAZBISjO8DG9PnE';
 
 
-            $.ajax({
-                url: 'https://api.spotify.com/v1/artists/0OdUWJ0sBjDrqHygGUXeCF',
-                headers: {
-                  'Authorization': 'Bearer ' + access_token
-                },
-                success: function(response) {
-                  console.log('get artist:  ' , response);
-                }
-            });
+          function gotArtist (artist) {
+            console.log('got artist ', artist)
+          }
+          
+          spotifyApi.getArtist(artistId, access_token).then(gotArtist);
+
 
           } else {
              
           }
+
 
         }
 

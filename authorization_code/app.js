@@ -12,10 +12,15 @@ var request = require('request'); // "Request" library
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 
+/*
+var client_id = 'CLIENT_ID'; // Your client id
+var client_secret = 'CLIENT_SECRET'; // Your secret
+var redirect_uri = 'REDIRECT_URI'; // Your redirect uri
+*/
+
 var client_id = '72ac1ab19aee4448ad8177a8a9362079'; // Your client id
 var client_secret = 'f2f3af2c6dd644178f76a8e2a4c2ef22'; // Your secret
 var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
-
 
 /**
  * Generates a random string containing numbers and letters
@@ -39,8 +44,15 @@ var app = express();
 app.use(express.static(__dirname + '/public'))
    .use(cookieParser());
 
+/*
+We go to the login url - localhost:8888/login -
+once we've clicked on the Login button.
+Make call to Spotify to authorise, sending in client_id
+Eventually we go to '/callback' which is where we 
+get the 'access token' and 'refresh token'
+*/
 app.get('/login', function(req, res) {
-
+  console.log('going to /login - calling https://accounts.spotify.com/authorize?')
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
 
@@ -58,6 +70,7 @@ app.get('/login', function(req, res) {
 
 app.get('/callback', function(req, res) {
 
+console.log('going to /callback - calling https://accounts.spotify.com/api/token')
   // your application requests refresh and access tokens
   // after checking the state parameter
 

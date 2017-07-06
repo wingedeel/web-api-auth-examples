@@ -2,10 +2,12 @@
 <html>
   <head>
     <title>Example of the Authorization Code flow with Spotify</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Bitter:400,700' rel='stylesheet' type='text/css'>
   </head>
 
   <body>
-  
+
     <div class="container">
       <div id="login">
         <h1>Example of the Authorization Code flow</h1>
@@ -13,7 +15,17 @@
       </div>
     </div>
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
+    <div  class="header">
+      <h2 class="header-title">Enter an artist</h2>
+      <form id='searchForm'>
+          <input class="text-input" type="text" id="textInput"> 
+          <button class="button" type="button" id="submitBtn">Submit</button>
+      </form>
+    </div>
+    <div class="results" id="resultsSection">
+      <h2 class="results-title" id="resultsTitle">Results</h2>
+    </div>
+
   <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
   <script src="spotify-api.js"></script>
   <script src="main.js"></script>

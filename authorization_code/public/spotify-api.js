@@ -5,7 +5,8 @@ var spotifyApi = function (serverBasePath, access_token) {
   var getArtistRelatedArtists = function(artistId) {
     var url = serverBasePath + '/artists/' + artistId + '/related-artists';
     return $.ajax({
-        url: url
+        url: url,
+        headers: authHeader
     })
   };
 
@@ -13,6 +14,7 @@ var spotifyApi = function (serverBasePath, access_token) {
     var url = serverBasePath + '/artists/' + artistId + '/top-tracks';
     return $.ajax({
         url: url,
+        headers: authHeader,
         data: {
             country: country
         }
@@ -30,28 +32,39 @@ var spotifyApi = function (serverBasePath, access_token) {
   var getArtists = function(artistIds) {
     var url = serverBasePath + '/artists?ids=' + artistIds;
     return $.ajax({
-        url: url
+        url: url,
+        headers: authHeader
     })
   };
 
   var searchArtists = function(q, params) {
+    /*
     var url = serverBasePath + '/search';
     var data = params
     data['q'] = q
     data['type'] = 'artist'
-
     return $.ajax({
         url: url,
-        data: data
+       headers: authHeader,
+       data: data
+    })
+    */
+    var url = serverBasePath + '/search?q=' + q + '&type=artist';
+    
+    return $.ajax({
+        url: url,
+        headers: authHeader
     })
   };
+
+
 
   return {
     getArtistRelatedArtists: getArtistRelatedArtists,
     getArtist: getArtist,
     getArtists: getArtists,
     searchArtists: searchArtists,
-    getArtistTopTracks: getArtistTopTracks,
+    getArtistTopTracks: getArtistTopTracks
   }
 
 };
